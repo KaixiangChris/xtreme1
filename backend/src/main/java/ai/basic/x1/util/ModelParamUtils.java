@@ -19,6 +19,7 @@ public class ModelParamUtils {
         switch (modelCode) {
             case LIDAR_DETECTION:
             case IMAGE_DETECTION:
+            case YOLOV8_IMAGENET:
                 var modelClass = DefaultConverter.convert(resultFilterParam, PreModelParamDTO.class);
                 ValidateUtil.validate(modelClass);
                 break;

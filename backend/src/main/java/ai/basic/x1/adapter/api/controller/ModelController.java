@@ -121,6 +121,12 @@ public class ModelController {
                 ModelObjectDTO.class);
     }
 
+    @PostMapping("/yolov8/recognition")
+    public ModelObjectDTO yolov8Recognition(@Validated @RequestBody ModelRecognitionRequestDTO modelRecognitionRequest) {
+        return DefaultConverter.convert(modelRecognitionUseCase.recognition(buildModelMessageBO(modelRecognitionRequest, ModelCodeEnum.YOLOV8_IMAGENET)),
+                ModelObjectDTO.class);
+    }
+
     @PostMapping("/pointCloud/recognition")
     public ModelObjectDTO pointCloudRecognition(@Validated @RequestBody ModelRecognitionRequestDTO modelRecognitionRequest) {
         return DefaultConverter.convert(modelRecognitionUseCase.recognition(buildModelMessageBO(modelRecognitionRequest, ModelCodeEnum.LIDAR_DETECTION)),
@@ -133,6 +139,8 @@ public class ModelController {
         var model = modelUseCase.findByModelCode(modelCodeEnum);
         var preModelParam = modelRecognitionRequest.toPreModelParamDTO();
         if (model.getModelCode() == ModelCodeEnum.IMAGE_DETECTION) {
+            preModelParam.setClasses(getImageClassLabelIds(model.getId(), modelRecognitionRequest.getClasses()));
+        } else if (model.getModelCode() == ModelCodeEnum.YOLOV8_IMAGENET) {
             preModelParam.setClasses(getImageClassLabelIds(model.getId(), modelRecognitionRequest.getClasses()));
         }
         var message = ModelMessageBO.builder()
