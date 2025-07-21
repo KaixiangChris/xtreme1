@@ -130,6 +130,15 @@ services:
     profiles:
       - model
     runtime: nvidia
+  yolov8-imagenet:
+    build: ./models/yolov8-imagenet
+    ports:
+      - 8296:5000
+    # You need to explicitly specify model profile to start this service.
+    profiles:
+      - model
+    # Uncomment the following line if you have NVIDIA GPU support
+    # runtime: nvidia
 volumes:
   mysql-data:
   redis-data:

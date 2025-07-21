@@ -156,4 +156,9 @@ public class JobConfig {
     public ImageDetectionModelHandler imageDetectionModelHandler() {
         return new ImageDetectionModelHandler();
     }
+
+    @Bean
+    public YoloV8ImageNetModelHandler yoloV8ImageNetModelHandler() {
+        return new YoloV8ImageNetModelHandler();
+    }
 }

@@ -4,6 +4,7 @@ import ai.basic.x1.adapter.api.config.ImageDatasetInitialInfo;
 import ai.basic.x1.adapter.api.config.PointCloudDatasetInitialInfo;
 import ai.basic.x1.adapter.api.job.converter.ModelCocoRequestConverter;
 import ai.basic.x1.adapter.api.job.converter.PointCloudDetectionModelReqConverter;
+import ai.basic.x1.adapter.api.job.converter.YoloV8RequestConverter;
 import ai.basic.x1.adapter.dto.ApiResult;
 import ai.basic.x1.adapter.dto.response.ModelResponseDTO;
 import ai.basic.x1.adapter.port.dao.*;
@@ -298,6 +299,11 @@ public class ModelUseCase {
                 dataInfoBO = dataInfoUseCase.getInitDataInfoBO(imageDatasetInitialInfo);
                 var predImageReqDTO = ModelCocoRequestConverter.convert(ModelMessageBO.builder().dataInfo(dataInfoBO).build());
                 requestBody = JSONUtil.toJsonStr(predImageReqDTO);
+                break;
+            case YOLOV8_IMAGENET:
+                dataInfoBO = dataInfoUseCase.getInitDataInfoBO(imageDatasetInitialInfo);
+                var yolov8ReqDTO = YoloV8RequestConverter.convert(ModelMessageBO.builder().dataInfo(dataInfoBO).build());
+                requestBody = JSONUtil.toJsonStr(yolov8ReqDTO);
                 break;
             case LIDAR_DETECTION:
                 dataInfoBO = dataInfoUseCase.getInitDataInfoBO(pointCloudDatasetInitialInfo);

@@ -373,7 +373,7 @@ CREATE TABLE `model`
     `scenario`       varchar(128)                                                     DEFAULT NULL COMMENT 'Scenes',
     `dataset_type`   enum ('LIDAR_FUSION','LIDAR_BASIC','IMAGE','LIDAR')              DEFAULT NULL COMMENT 'Dataset types supported by this model',
     `model_type`     enum ('DETECTION')                                               DEFAULT 'DETECTION' COMMENT 'Model type',
-    `model_code`     enum ('PRE_LABEL','COCO_80','LIDAR_DETECTION','IMAGE_DETECTION') DEFAULT NULL COMMENT 'Model''s unique identifier',
+    `model_code`     enum ('PRE_LABEL','COCO_80','LIDAR_DETECTION','IMAGE_DETECTION','YOLOV8_IMAGENET') DEFAULT NULL COMMENT 'Model''s unique identifier',
     `url`            varchar(500)                                                     DEFAULT NULL COMMENT 'Model run url',
     `is_deleted`     bit(1)       NOT NULL                                            DEFAULT b'0',
     `del_unique_key` bigint(20)   NOT NULL                                            DEFAULT '0' COMMENT '\nDelete unique flag, 0 when writing, set as primary key id after tombstone',
